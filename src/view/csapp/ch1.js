@@ -14,10 +14,15 @@ function Card(props) {
 
     return <div className="card">
         <div className="card-header">
-            当前得分：
-            <span className="score">
+            <div className="header-left">
+                当前得分：
+                <span className="score">
                 {currentScore}
-            </span>
+                </span>
+            </div>
+            <div className="header-right">
+                <Button primary onClick={reset}>重新挑战！</Button>
+            </div>
         </div>
 
         <div className={clsx("card-content",status)}>
@@ -29,10 +34,11 @@ function Card(props) {
         <div className="card-footer">
             <Button primary onClick={readAnswer}>查看答案</Button>
             <Button danger onClick={getScore}>确认得分</Button>
+            <Button cancel onClick={cancelScore}>取消得分</Button>
             {
                 currentDataIndex !== data.length - 1 ?
                     <Button primary onClick={nextQuestion}>下一题</Button> :
-                    <Button primary>查看挑战结果</Button>}
+                    <Button primary onClick={readTestResult}>查看挑战结果</Button>}
         </div>
     </div>
 
@@ -41,9 +47,15 @@ function Card(props) {
     }
 
     function getScore() {
-        if (scored) return console.log('已获取此分数');
+        if (scored) return console.log('已获取此分数!');
         setScored(true);
         setCurrentScore(x => x + score)
+    }
+
+    function cancelScore() {
+        if(!scored) return console.log('尚未获取此分数！')
+        setScored(false);
+        setCurrentScore(x => x - score)
     }
 
     function nextQuestion() {
@@ -51,12 +63,23 @@ function Card(props) {
         setScored(false);
         setCurrentDataIndex(x => x + 1);
     }
+    
+    function readTestResult() {
+
+    }
+
+    function reset() {
+        setStatus('question');
+        setScored(false);
+        setCurrentScore(0);
+        setCurrentDataIndex(0);
+    }
 }
 
 function Button(props) {
-    const {children, primary, danger, ...rest} = props;
+    const {children, primary, danger,cancel, ...rest} = props;
 
-    return <span className={clsx('button', {primary, danger})} {...rest}>
+    return <span className={clsx('button', {primary, danger, cancel})} {...rest}>
         {children}
     </span>
 }

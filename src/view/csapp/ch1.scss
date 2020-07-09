@@ -15,6 +15,8 @@
   background: #fff;
   box-shadow: 0 6px 16px -8px rgba(0,0,0,.08), 0 9px 28px 0 rgba(0,0,0,.05), 0 12px 48px 16px rgba(0,0,0,.03);
   &-header{
+    display: flex;
+    justify-content: space-between;
     padding:12px 20px;
     border-bottom:1px solid gainsboro;
     .score{
@@ -31,7 +33,7 @@
   }
   &-footer{
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(4,1fr);
     padding:8px 20px;
     border-top:1px solid gainsboro;
   }
@@ -61,6 +63,14 @@
       color: #fff;
       background-color: #ff7875;
       border-color: #ff7875;
+    }
+  }
+  &.cancel {
+    background-color: transparent;
+    border: 1px solid #1890ff;
+    box-shadow: 0 2px 6px 0 transparentize(#1890ff, 0.5);
+    &:hover {
+      background-color: transparentize(#1890ff, 0.7);
     }
   }
   display: inline-flex;
