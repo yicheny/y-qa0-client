@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'y-ui0/lib/style.css';
+import 'y-markdown/lib/index.css';
 import './index.scss';
 
 ReactDOM.render(

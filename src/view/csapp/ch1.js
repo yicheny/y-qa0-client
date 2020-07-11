@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
-import {Button,message} from 'y-ui0';
+import {Button, message} from 'y-ui0';
+import {Markdown} from 'y-markdown'
 import {data} from './ch1_data';
 import './ch1.scss';
 
@@ -13,6 +14,7 @@ function Card(props) {
 
     const {question, answer, score} = data[currentDataIndex];
 
+    const isQuestion = status === 'question';
     return <div className="card">
         <div className="card-header">
             <div className="header-left">
@@ -26,9 +28,12 @@ function Card(props) {
             </div>
         </div>
 
-        <div className={clsx("card-content",status)}>
+        <div className={clsx("card-content", status)}>
             {
-                status === 'question' ? question : answer
+                isQuestion ? '题目：' : '答案：'
+            }
+            {
+                isQuestion ? question : <Markdown>{answer}</Markdown>
             }
         </div>
 
@@ -48,23 +53,24 @@ function Card(props) {
     }
 
     function getScore() {
-        if (scored) return message.show({info:'已获取此分数!',icon:'info'},1600);
+        if (scored) return message.show({info: '已获取此分数!', icon: 'info'}, 1600);
         setScored(true);
         setCurrentScore(x => x + score)
     }
 
     function cancelScore() {
-        if(!scored) return message.show({info:'尚未获取此分数！',icon:'warn'},1600)
+        if (!scored) return message.show({info: '尚未获取此分数！', icon: 'warn'}, 1600)
         setScored(false);
         setCurrentScore(x => x - score)
     }
 
     function nextQuestion() {
         setStatus('question');
+        // setStatus('answer');
         setScored(false);
         setCurrentDataIndex(x => x + 1);
     }
-    
+
     function readTestResult() {
 
     }
