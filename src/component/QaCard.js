@@ -15,35 +15,38 @@ export default function Card(props) {
 
     const isQuestion = status === 'question';
     return <div className="card">
-        <div className="card-header">
-            <div className="header-left">
-                当前得分：
-                <span className="score">
+        <div className="card-show">
+            <div className="card-header">
+                <div className="header-left">
+                    当前得分：
+                    <span className="score">
                 {currentScore}
                 </span>
+                </div>
+                <div className="header-right">
+                    <Button primary onClick={reset}>重新挑战！</Button>
+                </div>
             </div>
-            <div className="header-right">
-                <Button primary onClick={reset}>重新挑战！</Button>
+
+            <div className={clsx("card-content", status)}>
+                {
+                    isQuestion ? `题目${currentDataIndex+1}：` : `答案${currentDataIndex+1}：`
+                }
+                {
+                    isQuestion ? question : <Markdown>{answer}</Markdown>
+                }
             </div>
         </div>
 
-        <div className={clsx("card-content", status)}>
-            {
-                isQuestion ? '题目：' : '答案：'
-            }
-            {
-                isQuestion ? question : <Markdown>{answer}</Markdown>
-            }
-        </div>
-
-        <div className="card-footer">
-            <Button primary onClick={readAnswer}>查看答案</Button>
-            <Button danger onClick={getScore}>确认得分</Button>
-            <Button cancel onClick={cancelScore}>取消得分</Button>
+        <div className="card-operation">
             {
                 currentDataIndex !== data.length - 1 ?
-                    <Button primary onClick={nextQuestion}>下一题</Button> :
-                    <Button primary onClick={readTestResult}>查看挑战结果</Button>}
+                    <Button onClick={nextQuestion}>下一题</Button> :
+                    <Button primary onClick={readTestResult}>查看挑战结果</Button>
+            }
+            <Button onClick={readAnswer}>查看答案</Button>
+            <Button danger onClick={getScore}>确认得分</Button>
+            <Button cancel onClick={cancelScore}>取消得分</Button>
         </div>
     </div>
 

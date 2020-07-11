@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import 'y-ui0/lib/style.css';
 import 'y-markdown/lib/index.css';
 import './index.scss';
+import './common.scss';
 
 ReactDOM.render(
   <React.StrictMode>

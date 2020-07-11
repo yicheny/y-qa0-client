@@ -185,7 +185,4 @@ export const data = [
         answer: '一种名为*静态随机访问存储器(SRAM)*的硬件技术',
         score: 2
     },
-    {
-
-    }
 ]
