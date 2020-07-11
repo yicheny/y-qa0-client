@@ -1,15 +1,22 @@
-import React, {useState} from "react";
+import React, {useState, useLayoutEffect} from "react";
 import clsx from "clsx";
 import {Button,message} from 'y-ui0';
 import {Markdown} from "y-markdown";
+import {useExactHeight} from "../utils/hook";
 import './QaCard.scss';
 
 export default function Card(props) {
     const {data} = props;
     const [currentScore, setCurrentScore] = useState(0);
-    const [currentDataIndex, setCurrentDataIndex] = useState(0);
+    const [currentDataIndex, setCurrentDataIndex] = useState(11);//
     const [scored, setScored] = useState(false);
     const [status, setStatus] = useState('question');
+
+    const [exactContainerRef,containerRef,updateHeight] = useExactHeight();
+
+    useLayoutEffect(()=>{
+        updateHeight(status==='answer');
+    },[status,updateHeight])
 
     const {question, answer, score} = data[currentDataIndex];
 
@@ -28,13 +35,15 @@ export default function Card(props) {
                 </div>
             </div>
 
-            <div className={clsx("card-content", status)}>
-                {
-                    isQuestion ? `题目${currentDataIndex+1}：` : `答案${currentDataIndex+1}：`
-                }
-                {
-                    isQuestion ? question : <Markdown>{answer}</Markdown>
-                }
+            <div className={clsx("card-content", status)} ref={exactContainerRef}>
+                <div ref={containerRef}>
+                    {
+                        isQuestion ? `题目${currentDataIndex+1}：` : `答案${currentDataIndex+1}：`
+                    }
+                    {
+                        isQuestion ? question : <Markdown>{answer}</Markdown>
+                    }
+                </div>
             </div>
         </div>
 
