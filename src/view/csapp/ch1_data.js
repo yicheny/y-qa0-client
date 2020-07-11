@@ -186,6 +186,6 @@ export const data = [
         score: 2
     },
     {
-        
+
     }
 ]
