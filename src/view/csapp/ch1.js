@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
+import {Button,message} from 'y-ui0';
 import {data} from './ch1_data';
 import './ch1.scss';
 
@@ -47,13 +48,13 @@ function Card(props) {
     }
 
     function getScore() {
-        if (scored) return console.log('已获取此分数!');
+        if (scored) return message.show({info:'已获取此分数!',icon:'info'},1600);
         setScored(true);
         setCurrentScore(x => x + score)
     }
 
     function cancelScore() {
-        if(!scored) return console.log('尚未获取此分数！')
+        if(!scored) return message.show({info:'尚未获取此分数！',icon:'warn'},1600)
         setScored(false);
         setCurrentScore(x => x - score)
     }
@@ -74,14 +75,6 @@ function Card(props) {
         setCurrentScore(0);
         setCurrentDataIndex(0);
     }
-}
-
-function Button(props) {
-    const {children, primary, danger,cancel, ...rest} = props;
-
-    return <span className={clsx('button', {primary, danger, cancel})} {...rest}>
-        {children}
-    </span>
 }
 
 function Ch1(props) {

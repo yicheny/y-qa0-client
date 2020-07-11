@@ -19,4 +19,7 @@ export const data = [
         answer:'位就是0或1',
         score:1
     },
+    {
+        
+    }
 ]
