@@ -8,14 +8,14 @@ import './QaCard.scss';
 export default function Card(props) {
     const {data} = props;
     const [currentScore, setCurrentScore] = useState(0);
-    const [currentDataIndex, setCurrentDataIndex] = useState(11);//
+    const [currentDataIndex, setCurrentDataIndex] = useState(0);
     const [scored, setScored] = useState(false);
     const [status, setStatus] = useState('question');
 
     const [exactContainerRef,containerRef,updateHeight] = useExactHeight();
 
     useLayoutEffect(()=>{
-        updateHeight(status==='answer');
+        return updateHeight(status==='answer');
     },[status,updateHeight])
 
     const {question, answer, score} = data[currentDataIndex];
@@ -25,10 +25,7 @@ export default function Card(props) {
         <div className="card-show">
             <div className="card-header">
                 <div className="header-left">
-                    当前得分：
-                    <span className="score">
-                {currentScore}
-                </span>
+                    当前得分：<span className="score">{currentScore}</span>
                 </div>
                 <div className="header-right">
                     <Button primary onClick={reset}>重新挑战！</Button>
@@ -77,7 +74,6 @@ export default function Card(props) {
 
     function nextQuestion() {
         setStatus('question');
-        // setStatus('answer');
         setScored(false);
         setCurrentDataIndex(x => x + 1);
     }
