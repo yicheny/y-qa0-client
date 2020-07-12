@@ -7,6 +7,7 @@ import './QaCard.scss';
 
 export default function Card(props) {
     const {data} = props;
+    // console.log('总分',data.reduce((acc,x)=>acc+x.score,0));
     const [currentScore, setCurrentScore] = useState(0);
     const [currentDataIndex, setCurrentDataIndex] = useState(0);
     const [scored, setScored] = useState(false);
