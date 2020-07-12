@@ -4,7 +4,7 @@ import {data} from './ch1_data';
 
 function Ch1(props) {
     return (<div className='fill flex-center'>
-        <QaCard data={data}/>
+        <QaCard data={data.slice(0,10)}/>
     </div>);
 }
 

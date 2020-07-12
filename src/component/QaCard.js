@@ -36,7 +36,7 @@ export default function Card(props) {
             <div className={clsx("card-content", status)} ref={exactContainerRef}>
                 <div ref={containerRef}>
                     {
-                        isQuestion ? `题目${currentDataIndex+1}：` : `答案${currentDataIndex+1}：`
+                        isQuestion ? `关卡${currentDataIndex+1}：` : `答案${currentDataIndex+1}：`
                     }
                     {
                         isQuestion ? question : <Markdown>{answer}</Markdown>
@@ -48,7 +48,7 @@ export default function Card(props) {
         <div className="card-operation">
             {
                 currentDataIndex !== data.length - 1 ?
-                    <Button onClick={nextQuestion}>下一题</Button> :
+                    <Button onClick={nextQuestion}>下一关</Button> :
                     <Button primary onClick={readTestResult}>查看挑战结果</Button>
             }
             <Button onClick={readAnswer}>查看答案</Button>
@@ -74,6 +74,7 @@ export default function Card(props) {
     }
 
     function nextQuestion() {
+        if(status!=='answer') return message.show({info:'必须查看答案，才能挑战下一关！',icon:'warn'},1600)
         setStatus('question');
         setScored(false);
         setCurrentDataIndex(x => x + 1);
