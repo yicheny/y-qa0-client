@@ -30,7 +30,7 @@ export default function Card(props) {
         })
     },[scored,currentDataIndex,data])
 
-    const {question, answer} = data[currentDataIndex];
+    const {question, answer,score} = data[currentDataIndex];
 
     const isQuestion = status === 'question';
     return <div className="card">
@@ -50,7 +50,7 @@ export default function Card(props) {
                         isQuestion ? `题目${currentDataIndex + 1}：` : `答案${currentDataIndex + 1}：`
                     }
                     {
-                        isQuestion ? question : <Markdown>{answer}</Markdown>
+                        isQuestion ? `${question}（+${score}）` : <Markdown>{answer}</Markdown>
                     }
                 </div>
             </div>
