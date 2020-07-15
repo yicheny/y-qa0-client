@@ -62,16 +62,13 @@ export default function Card(props) {
                     <Button onClick={nextQuestion}>下一题</Button> :
                     <Button primary onClick={readTestResult}>查看挑战结果</Button>
             }
-            <Button onClick={readAnswer}>查看答案</Button>
+            <Button onClick={()=>setStatus('answer')}>查看答案</Button>
             <Button danger onClick={getScore}>确认得分</Button>
             <Button cancel onClick={cancelScore}>取消得分</Button>
             <Button primary disabled={currentDataIndex===0} onClick={prevQuestion}>上一题</Button>
+            <Button onClick={()=>setStatus('question')}>查看题目</Button>
         </div>
     </div>
-
-    function readAnswer() {
-        setStatus('answer');
-    }
 
     function getScore() {
         if (scored) return message.show({info: '已获取此分数!', icon: 'info'}, DURATION_TIME);
