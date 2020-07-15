@@ -65,6 +65,7 @@ export default function Card(props) {
             <Button onClick={readAnswer}>查看答案</Button>
             <Button danger onClick={getScore}>确认得分</Button>
             <Button cancel onClick={cancelScore}>取消得分</Button>
+            <Button primary disabled={currentDataIndex===0} onClick={prevQuestion}>上一题</Button>
         </div>
     </div>
 
@@ -83,10 +84,19 @@ export default function Card(props) {
     }
 
     function nextQuestion() {
-        if (status !== 'answer') return message.show({info: '必须查看答案，才能挑战下一关！', icon: 'warn'}, DURATION_TIME)
         setStatus('question');
         setScored(false);
         setCurrentDataIndex(x => x + 1);
+    }
+
+    function prevQuestion() {
+        setScored(false);
+        setStatus("question");
+        setHistoryData(x=>{
+            x[currentDataIndex].score = 0;
+            return [...x];
+        })
+        setCurrentDataIndex(x=>x-1)
     }
 
     function readTestResult() {
