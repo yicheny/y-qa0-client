@@ -1,5 +1,6 @@
-import React, {useState, useLayoutEffect, useEffect} from "react";
+import React, {useState, useLayoutEffect, useEffect, useMemo} from "react";
 import clsx from "clsx";
+import _ from 'lodash';
 import {Button, message} from 'y-ui0';
 import {Markdown} from "y-markdown";
 import {useExactHeight} from "../utils/hook";
@@ -9,7 +10,7 @@ import './QaCard.scss';
 const DURATION_TIME = 1600;
 
 //UI组件
-export default function Card(props) {
+function Card(props) {
     const {data} = props;
     // console.log('总分',data.reduce((acc,x)=>acc+x.score,0));
     const [currentDataIndex, setCurrentDataIndex] = useState(0);
@@ -30,7 +31,9 @@ export default function Card(props) {
         })
     },[scored,currentDataIndex,data])
 
-    const {question, answer,score} = data[currentDataIndex];
+    const {question, answer,score} = useMemo(()=>{
+        return data[currentDataIndex];
+    },[data,currentDataIndex]);
 
     const isQuestion = status === 'question';
     return <div className="card">
@@ -110,7 +113,16 @@ export default function Card(props) {
     }
 }
 
+export default WithCheckData(Card);
+
 //函数
 function getInitHistoryData(data) {
-    return data.map(x => ({question: x.question, score: 0}));
+    return _.map(data,x => ({question: x.question, score: 0}));
+}
+
+function WithCheckData(WrapComponent){
+    return props=>{
+        if(!_.isArray(props.data)) return <div style={{width:720,height:410}}>暂无数据</div>
+        return <WrapComponent {...props}/>
+    }
 }

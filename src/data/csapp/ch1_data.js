@@ -1,4 +1,4 @@
-export const data = [
+const data = [
     {
         question:'源程序是如何保存在计算机中的?',
         answer:'我们编写源程序时，使用的`abcd{}...`这一类字符，会被转换成不同二进制字节保存在计算机中',
@@ -357,3 +357,5 @@ export const data = [
         score: 2
     }
 ]
+
+export default data;

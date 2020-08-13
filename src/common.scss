@@ -11,3 +11,10 @@
   justify-content: center;
   align-items: center;
 }
+
+//针对y-ui0样式的弥补
+.y-dropdown{
+  .input-box{
+    background: #fff;
+  }
+}
