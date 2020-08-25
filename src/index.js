@@ -7,6 +7,7 @@ import 'y-ui0/lib/style.css';
 import 'y-markdown/lib/index.css';
 import './index.scss';
 import './common.scss';
+import './uiEnhance.scss';
 
 ReactDOM.render(
   <React.StrictMode>

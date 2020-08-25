@@ -1,3 +1,5 @@
+//通用样式类名
+
 .fill{
   position:absolute;
   top:0;
@@ -10,11 +12,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-//针对y-ui0样式的弥补
-.y-dropdown{
-  .input-box{
-    background: #fff;
-  }
 }
